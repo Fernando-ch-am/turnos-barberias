@@ -2,1208 +2,272 @@
 
 Plataforma web para la gestión y reserva de turnos en peluquerías y barberías.
 
-> **Estado del proyecto:** Propuesta inicial — Trabajo Final Integrador
-> **Modalidad:** Desarrollo web Full Stack
-> **Equipo:** Fernando Chacón, Elias Carulla, Nicolas Gonzalez
-> **Fecha estimada de entrega final:** 14/11/2026
+**Estado del proyecto:** Propuesta inicial — 1.ª Entrega del Trabajo Final Integrador
+**Modalidad:** Desarrollo web Full Stack
+**Equipo:** Fernando Chacón, Elias Carulla, Nicolás González
+**Fecha de esta entrega:** 30/08/2026
+**Fecha estimada de entrega final:** 14/11/2026
 
 ---
 
 ## 1. Descripción general
 
-**Turnos Barberías** es una plataforma web orientada a facilitar la gestión de turnos entre clientes y peluquerías/barberías.
+Turnos Barberías es una plataforma web orientada a facilitar la gestión de turnos entre clientes y peluquerías/barberías.
 
-El sistema permitirá que los clientes puedan buscar establecimientos, consultar los servicios disponibles, visualizar horarios disponibles y reservar turnos de manera online.
+El sistema permitirá que los clientes busquen establecimientos, consulten los servicios disponibles, visualicen horarios y reserven turnos online. Por otro lado, los propietarios o profesionales podrán registrar y administrar su establecimiento, configurar los servicios ofrecidos, establecer sus horarios de atención y gestionar las reservas recibidas.
 
-Por otro lado, los propietarios o profesionales podrán registrar y administrar su establecimiento, configurar los servicios ofrecidos, establecer sus horarios de atención y gestionar las reservas recibidas.
+El sistema contará con distintos roles de usuario y aplicará reglas de negocio para garantizar la consistencia de las reservas, evitando conflictos como la asignación de dos clientes al mismo horario.
 
-El sistema contará con diferentes roles de usuario y aplicará reglas de negocio para garantizar la consistencia de las reservas, evitando conflictos como la asignación de dos clientes al mismo horario.
+## 2. Problemática
 
-Como funcionalidad de ampliación, se contempla incorporar un sistema de mensajería interna entre clientes y profesionales asociado a las reservas.
+**Actores afectados:** dueños y profesionales de peluquerías/barberías de pequeña escala, y sus clientes.
 
-### Objetivo principal
+**Contexto y origen del problema:** actualmente, muchos pequeños establecimientos gestionan sus turnos mediante canales informales (WhatsApp, llamadas telefónicas, redes sociales o agendas físicas). Esto no es una limitación tecnológica del rubro sino una ineficiencia tolerada: el proceso funciona, pero de forma manual, dispersa y propensa a errores.
 
-Desarrollar una solución web que permita digitalizar y centralizar la gestión de turnos de peluquerías y barberías, reduciendo la gestión manual y facilitando tanto la reserva para los clientes como la administración de la agenda para los profesionales.
+**Impacto medible:**
+- Tiempo perdido por el profesional coordinando turnos manualmente vía mensajes (varios intercambios por cada reserva).
+- Turnos duplicados o solapados por falta de una agenda centralizada, con la consecuente pérdida de tiempo y mala experiencia del cliente.
+- Ausencia de historial de reservas, lo que dificulta el seguimiento de clientes recurrentes y la toma de decisiones del negocio.
+- Pérdida de potenciales clientes nuevos que no encuentran fácilmente información centralizada de horarios, servicios y precios.
 
----
+**¿Admite una solución tecnológica?** Sí: se trata de un proceso de coordinación e información que puede centralizarse y automatizarse, reduciendo el costo de tiempo y el margen de error humano, sin requerir cambios de fondo en cómo opera el negocio.
 
-# 2. Problemática
+**Validación del problema:**
+- El problema ocurre actualmente en establecimientos que no usan software de gestión.
+- Existen soluciones parciales (agendas de WhatsApp, planillas, redes sociales) que no resuelven la centralización ni evitan duplicados.
+- Es técnicamente factible de resolver con el stack y los tiempos disponibles para la cursada (ver secciones 9 y 12).
 
-Actualmente, muchos pequeños establecimientos de peluquería y barbería gestionan sus turnos mediante canales informales como WhatsApp, llamadas telefónicas, redes sociales o agendas físicas.
+## 3. Actores y necesidades
 
-Esta modalidad puede generar diferentes problemas:
+### Cliente
+Necesita encontrar un establecimiento, conocer servicios/precios/disponibilidad y reservar sin fricción, además de poder gestionar y consultar sus propios turnos.
 
-* Dificultad para conocer los horarios realmente disponibles.
-* Intercambio constante de mensajes para coordinar un turno.
-* Posibilidad de reservar accidentalmente un mismo horario para dos clientes.
-* Falta de una agenda centralizada.
-* Dificultad para administrar cancelaciones y cambios.
-* Falta de historial de reservas.
-* Poca información centralizada sobre servicios y precios.
-* Dificultad para que nuevos clientes encuentren establecimientos disponibles.
-* Ausencia de un mecanismo integrado de reseñas y calificaciones.
+- Registrarse e iniciar sesión.
+- Buscar peluquerías y barberías, y consultar su información.
+- Consultar servicios, duración y precios.
+- Visualizar disponibilidad y reservar un turno.
+- Consultar sus reservas, su historial y cancelar según las reglas establecidas.
+- Calificar y reseñar servicios ya realizados.
 
----
+### Profesional
+Necesita digitalizar su agenda, evitar conflictos de horarios y tener visibilidad de sus reservas y clientes.
 
-# 3. Solución propuesta
+- Registrarse como profesional y crear/administrar su establecimiento.
+- Configurar los servicios ofrecidos y los horarios de atención.
+- Consultar su agenda y gestionar las reservas recibidas.
+- Actualizar el estado de los turnos.
+- Consultar la información de sus clientes asociada a las reservas.
 
-Se propone desarrollar una plataforma web que centralice la relación entre clientes y peluquerías/barberías.
+## 4. Propuesta de valor
 
-El cliente podrá:
+Centralizar en una única plataforma web la relación entre clientes y peluquerías/barberías, reemplazando la coordinación manual por un sistema con reglas de negocio que garanticen consistencia (sin turnos duplicados), disponibilidad visible en tiempo real y un historial accesible tanto para el cliente como para el profesional.
 
-1. Registrarse e iniciar sesión.
-2. Buscar peluquerías y barberías.
-3. Consultar información del establecimiento.
-4. Consultar servicios, duración y precios.
-5. Visualizar disponibilidad.
-6. Reservar un turno.
-7. Consultar sus reservas.
-8. Cancelar una reserva según las reglas establecidas.
-9. Consultar su historial.
-10. Calificar y reseñar servicios realizados.
+## 5. Objetivos del proyecto
 
-El profesional podrá:
+### Objetivo general
+Diseñar y desarrollar una aplicación web Full Stack que permita gestionar de manera centralizada las agendas y reservas de peluquerías y barberías, alcanzando un MVP funcional y desplegado antes del 14/11/2026.
 
-1. Registrarse como profesional.
-2. Crear y administrar su establecimiento.
-3. Configurar los servicios ofrecidos.
-4. Configurar horarios de atención.
-5. Consultar su agenda.
-6. Gestionar las reservas.
-7. Actualizar el estado de los turnos.
-8. Consultar información de sus clientes asociada a las reservas.
+### Objetivos específicos (medibles)
+1. Implementar autenticación y autorización basada en JWT, soportando los dos roles definidos (Cliente y Profesional), verificable mediante pruebas de acceso restringido por rol.
+2. Desarrollar una API REST que cubra los 6 módulos del dominio (usuarios, establecimientos, servicios, horarios, turnos y reseñas), con un mínimo de 25 endpoints documentados.
+3. Diseñar e implementar una base de datos relacional en PostgreSQL con al menos 6 entidades vinculadas mediante claves foráneas.
+4. Garantizar mediante reglas de negocio que el 100% de las reservas creadas respeten la disponibilidad horaria configurada, sin permitir solapamientos de turnos para un mismo establecimiento.
+5. Desarrollar interfaces responsivas, validadas en al menos 3 anchos de pantalla (mobile, tablet y escritorio).
+6. Implementar operaciones CRUD completas (alta, baja, modificación y consulta) para establecimientos, servicios y turnos.
+7. Aplicar validaciones tanto en frontend como en backend para el 100% de los formularios de la aplicación (registro, servicios, horarios y reservas).
+8. Desplegar al menos un componente principal (frontend, backend o base de datos) en un servicio cloud accesible públicamente antes del 14/11/2026.
+9. Cumplir con las tres instancias de entrega de la hoja de ruta de la asignatura (30/08, 27/09 y 14/11) en tiempo y forma.
+10. Documentar en el repositorio la arquitectura, el modelo de datos y las instrucciones de instalación y uso del sistema.
 
-Como funcionalidad de ampliación, se contempla:
+## 6. Alcance
 
-* Chat entre cliente y profesional.
-* Notificaciones.
-* Favoritos.
-* Estadísticas del establecimiento.
-* Mejoras avanzadas en búsqueda y filtros.
+### 6.1. Alcance del MVP
 
----
+El MVP contempla las funcionalidades necesarias para que el sistema sea funcional en un escenario real básico, detalladas a continuación por módulo.
 
-# 4. Objetivos del proyecto
+**Gestión de usuarios**
+- Registro de usuario con email y contraseña, seleccionando el rol (Cliente o Profesional).
+- Inicio y cierre de sesión mediante autenticación JWT.
+- Edición de datos básicos del perfil propio.
+- Restricción de operaciones según el rol del usuario autenticado.
 
-## Objetivo general
+**Gestión de establecimientos**
+- Registro de una peluquería/barbería por parte de un profesional, con nombre, descripción, dirección y teléfono.
+- Edición de la información del establecimiento por su propietario.
+- Activación/desactivación del establecimiento (un establecimiento inactivo no recibe nuevas reservas).
+- Consulta pública de establecimientos disponibles, con su información básica.
 
-Diseñar y desarrollar una aplicación web Full Stack que permita gestionar de manera centralizada las agendas y reservas de peluquerías y barberías.
+**Gestión de servicios**
+- Alta de un servicio asociado a un establecimiento, con nombre, descripción, precio y duración.
+- Modificación de un servicio existente.
+- Baja lógica de un servicio (un servicio inactivo no puede recibir nuevas reservas, pero se conserva en el historial).
+- Consulta de los servicios de un establecimiento, con precio y duración visibles para el cliente.
 
-## Objetivos específicos
+**Gestión de horarios**
+- Configuración de días y horarios de atención por establecimiento.
+- Validación de que no existan horarios superpuestos para un mismo período.
+- Cálculo de disponibilidad real combinando horario de atención y turnos ya reservados.
 
-* Implementar autenticación y autorización de usuarios.
-* Aplicar diferentes roles y permisos.
-* Desarrollar una API para la comunicación entre frontend y backend.
-* Diseñar e implementar una base de datos relacional.
-* Implementar reglas de negocio para la gestión de reservas.
-* Evitar conflictos y reservas duplicadas.
-* Desarrollar interfaces web responsivas.
-* Implementar operaciones CRUD.
-* Aplicar validaciones en frontend y backend.
-* Implementar manejo de errores.
-* Aplicar una arquitectura organizada por responsabilidades.
-* Utilizar control de versiones mediante Git.
-* Realizar el despliegue de los componentes principales en servicios cloud.
-* Documentar el funcionamiento y la arquitectura del sistema.
-* Adquirir experiencia práctica en desarrollo Full Stack.
+**Gestión de turnos**
+- Consulta de disponibilidad de un establecimiento para un servicio y fecha determinados.
+- Creación de una reserva, verificando que el horario esté disponible, dentro del horario de atención y en una fecha futura.
+- Consulta de reservas propias (por el cliente) o de la agenda completa (por el profesional).
+- Cancelación de una reserva según las reglas de negocio, liberando nuevamente el horario.
+- Cambio de estado de una reserva (pendiente, confirmada, completada, cancelada) por parte del profesional.
+- Conservación de un historial de turnos finalizados o cancelados.
 
----
+**Reseñas**
+- Calificación (puntaje) y comentario sobre un establecimiento, habilitados solo para clientes que hayan completado un turno allí.
+- Restricción de una reseña por turno completado.
+- Consulta pública de las reseñas de un establecimiento.
 
-# 5. Alcance
+### 6.2. Funcionalidades de ampliación
 
-## 5.1. Alcance del MVP
+Se implementarán únicamente si el avance del proyecto lo permite, sin comprometer las entregas principales:
 
-El MVP contempla las funcionalidades necesarias para que el sistema sea funcional y pueda utilizarse en un escenario real básico.
+- **Chat cliente-profesional:** mensajería asociada a una reserva, para consultas puntuales entre ambas partes.
+- **Notificaciones:** avisos ante creación, confirmación o cancelación de un turno.
+- **Favoritos:** posibilidad de que un cliente marque establecimientos preferidos para acceso rápido.
+- **Estadísticas para profesionales:** métricas básicas de reservas y servicios más solicitados.
+- **Filtros y búsqueda avanzada:** búsqueda de establecimientos por zona, servicio o disponibilidad horaria.
 
-### Gestión de usuarios
+### 6.3. Fuera de alcance
 
-* Registro.
-* Inicio de sesión.
-* Cierre de sesión.
-* Gestión básica del perfil.
-* Roles de usuario.
+Explícitamente no forman parte de este proyecto, ni del MVP ni de las ampliaciones: pagos online, aplicaciones móviles nativas, panel de administración multi-negocio (franquicias) y soporte multi-idioma.
 
-### Gestión de establecimientos
+## 7. Análisis de competencia y diferenciación
 
-* Registro de peluquería/barbería.
-* Edición de información.
-* Activación/desactivación del establecimiento.
-* Información básica del establecimiento.
+**Competidores directos:** plataformas de reserva de turnos ya existentes en el mercado (por ejemplo Fresha, Booksy o Treatwell), orientadas a peluquerías, barberías y centros de estética, que ofrecen agenda online, gestión de servicios y, en algunos casos, cobro anticipado.
 
-### Gestión de servicios
+**Competidores indirectos:** los canales informales actualmente usados por los establecimientos locales — WhatsApp, Instagram/redes sociales y agendas físicas — que compiten por resolver la misma necesidad sin ser soluciones de software dedicadas.
 
-* Alta de servicios.
-* Modificación de servicios.
-* Eliminación lógica de servicios.
-* Nombre.
-* Descripción.
-* Precio.
-* Duración.
+**Variables de comparación:**
 
-### Gestión de horarios
+| Variable | Competidores directos | Solución propuesta |
+|---|---|---|
+| Precio | Suscripciones mensuales, muchas veces en USD | Pensada para pequeños comercios locales, sin costo de licencia durante el desarrollo académico |
+| Funcionalidades | Muy completas, a veces excesivas para un comercio chico | Foco en lo esencial: agenda, servicios y reservas sin fricción |
+| Experiencia de uso | Orientada a mercados con alto volumen de usuarios | Adaptada a establecimientos pequeños de una ciudad como Ushuaia |
+| Tecnología/soporte | Plataformas cerradas, sin posibilidad de adaptación | Código propio, adaptable a necesidades puntuales del negocio |
+| Escalabilidad | Alta, pensada para cadenas | Suficiente para el escenario real de uno o pocos establecimientos por instancia |
 
-* Configuración de días de atención.
-* Horarios de apertura y cierre.
-* Gestión de disponibilidad.
-* Validación de horarios superpuestos.
+**Diferenciadores:** menor curva de aprendizaje para comercios chicos, sin costos de suscripción en esta etapa, y posibilidad de ajustar el sistema a necesidades locales específicas que una plataforma genérica no contempla.
 
-### Gestión de turnos
+**Riesgo competitivo y mitigación:** si un competidor directo lanzara una versión gratuita, la diferenciación pasaría por la simplicidad de uso y la posibilidad de adaptación a pedido, algo que las plataformas genéricas no ofrecen fácilmente.
 
-* Consulta de disponibilidad.
-* Creación de reservas.
-* Consulta de reservas.
-* Cancelación.
-* Cambio de estado.
-* Historial de turnos.
-* Prevención de reservas duplicadas.
-
-### Reseñas
+## 8. Stack tecnológico
 
-* Calificación del establecimiento/profesional.
-* Comentario.
-* Consulta de reseñas.
-* Restricción de reseñas a clientes que hayan realizado un turno.
+| Capa | Tecnología |
+|---|---|
+| Frontend | Next.js + TypeScript |
+| Backend | Node.js + Express.js |
+| API | REST |
+| Base de datos | PostgreSQL |
+| Servicio de base de datos | Supabase |
+| Autenticación | JWT |
+| Control de versiones | Git / GitHub |
+| Gestión de proyecto | GitHub Projects |
+| Hosting Frontend | Vercel |
+| Hosting Backend | Render / Railway |
+| IDE | Visual Studio Code |
 
----
+### Justificación
 
-## 5.2. Funcionalidades de ampliación
+- **Frontend (Next.js + TypeScript):** el equipo ya tiene experiencia con React, y Next.js aporta las herramientas necesarias (ruteo, renderizado, integración con TypeScript) para construir una aplicación web moderna sin sumar curva de aprendizaje significativa.
+- **Backend (Node.js + Express):** permite unificar el lenguaje (JavaScript/TypeScript) entre frontend y backend, y su modelo de I/O no bloqueante es adecuado para un sistema con múltiples consultas de disponibilidad concurrentes. Además, permite trabajar explícitamente los conceptos vistos en la cursada: rutas, controllers, services, repositories, DTOs y middleware.
+- **Base de datos (PostgreSQL):** el dominio es fuertemente relacional (usuarios, establecimientos, servicios, horarios y turnos vinculados entre sí, con necesidad de integridad transaccional para evitar reservas duplicadas), por lo que una base relacional es la opción más adecuada frente a una no relacional.
+- **Despliegue (Vercel / Render-Railway / Supabase):** son servicios PaaS gratuitos en sus planes iniciales, lo que reduce la complejidad operativa y se ajusta a la escala real del proyecto (un número acotado de establecimientos y usuarios durante la cursada), evitando sobreingeniería.
 
-Estas funcionalidades se implementarán únicamente si el avance del proyecto permite incorporarlas sin comprometer las entregas principales.
+### Arquitectura general
 
-* Chat cliente-profesional.
-* Mensajería en tiempo real.
-* Notificaciones.
-* Sistema de favoritos.
-* Estadísticas para profesionales.
-* Filtros avanzados.
-* Mejoras de búsqueda.
-* Recordatorios de turnos.
-* Panel administrativo.
-
-Estas funcionalidades no forman parte de los requisitos mínimos necesarios para considerar funcional el MVP.
-
----
-
-# 6. Usuarios y roles
-
-El sistema contará inicialmente con dos roles principales.
-
-## Cliente
-
-Puede:
-
-* Registrarse.
-* Iniciar sesión.
-* Consultar establecimientos.
-* Consultar servicios.
-* Consultar disponibilidad.
-* Reservar turnos.
-* Consultar sus reservas.
-* Cancelar reservas según las reglas del sistema.
-* Consultar historial.
-* Realizar reseñas cuando corresponda.
-
-## Profesional
-
-Puede:
-
-* Registrarse.
-* Crear su establecimiento.
-* Administrar la información del establecimiento.
-* Crear y administrar servicios.
-* Configurar horarios.
-* Consultar su agenda.
-* Gestionar reservas.
-* Actualizar el estado de los turnos.
-* Consultar información relacionada con sus reservas.
-
----
-
-# 7. Tecnologías
-
-La siguiente es la propuesta tecnológica inicial. Podrá ajustarse en conjunto con el tutor durante la etapa de arquitectura.
-
-| Capa                      | Tecnología                                                        |
-| ------------------------- | ----------------------------------------------------------------- |
-| Frontend                  | Next.js                                                           |
-| Lenguaje frontend         | TypeScript                                                        |
-| Backend                   | Node.js                                                           |
-| Framework backend         | Express.js                                                        |
-| API                       | REST                                                              |
-| Base de datos             | PostgreSQL                                                        |
-| Servicio de base de datos | Supabase                                                          |
-| Autenticación             | JWT / mecanismo de autenticación definido durante la arquitectura |
-| Control de versiones      | Git / GitHub                                                      |
-| Gestión de proyecto       | GitHub Projects                                                   |
-| Hosting Frontend          | Vercel                                                            |
-| Hosting Backend           | Render / Railway                                                  |
-| IDE                       | Visual Studio Code                                                |
-
-### Justificación inicial
-
-Se propone utilizar **Next.js** para el frontend por su integración con React, TypeScript y las herramientas necesarias para construir una aplicación web moderna.
-
-Para el backend se propone **Node.js + Express.js**, permitiendo desarrollar una API REST separada y trabajar explícitamente los conceptos de:
-
-* Rutas.
-* Controllers.
-* Services.
-* Business Logic.
-* Repositories.
-* DTOs.
-* Validaciones.
-* Middleware.
-* Autenticación.
-* Manejo de errores.
-
-Se utilizará **PostgreSQL** como base de datos debido a la naturaleza relacional del dominio y a la necesidad de manejar relaciones entre usuarios, establecimientos, servicios, horarios y reservas.
-
-**Supabase** se propone inicialmente como proveedor de PostgreSQL y servicios asociados.
-
-El frontend podrá desplegarse en **Vercel**, mientras que el backend podrá desplegarse en **Render o Railway**, sujeto a la evaluación de costos, límites y facilidad de configuración.
-
----
-
-# 8. Arquitectura propuesta
-
-El sistema se organizará siguiendo una arquitectura por capas para separar responsabilidades.
-
-```text
+```
 ┌─────────────────────────────┐
 │          CLIENTE            │
 │       Navegador Web         │
 └──────────────┬──────────────┘
-               │
                │ HTTPS / REST
                ▼
 ┌─────────────────────────────┐
 │          FRONTEND           │
-│          Next.js            │
-│         TypeScript          │
+│      Next.js + TypeScript   │
 └──────────────┬──────────────┘
-               │
                │ HTTP
                ▼
 ┌─────────────────────────────┐
-│           BACKEND           │
-│      Node.js + Express      │
-│                             │
-│ Routes                      │
-│ Controllers                 │
-│ Services / Business Logic   │
-│ Repositories                │
-│ DTOs / Validations           │
-│ Middleware                  │
+│           BACKEND            │
+│      Node.js + Express       │
+│  Routes → Controllers →      │
+│  Services → Repositories     │
 └──────────────┬──────────────┘
-               │
                │ SQL
                ▼
 ┌─────────────────────────────┐
-│         PostgreSQL          │
-│          Supabase           │
+│    PostgreSQL (Supabase)     │
 └─────────────────────────────┘
 ```
 
----
+> El modelo de datos detallado, el listado definitivo de módulos y la estructura del repositorio se presentarán en la **2.ª Entrega (Diseño y Módulos)**, conforme a la hoja de ruta de la asignatura.
 
-# 9. Business Logic
+## 9. Reglas de negocio principales
 
-Uno de los objetivos técnicos principales del proyecto será implementar correctamente la lógica de negocio en el backend.
+- Un horario no puede ser reservado por dos clientes simultáneamente.
+- Una reserva debe estar asociada a un cliente autenticado, un establecimiento y un servicio activo.
+- No se permiten reservas en fechas pasadas ni fuera del horario de atención configurado.
+- Una reserva cancelada libera nuevamente el horario.
+- Un establecimiento o servicio inactivo no puede recibir nuevas reservas.
+- Un cliente solo puede reseñar un establecimiento si completó un turno allí, y como máximo una vez por turno.
+- El email de cada usuario debe ser único, y cada usuario solo puede operar sobre sus propios recursos.
 
-La lógica de negocio será responsable de controlar que las operaciones cumplan las reglas del dominio antes de modificar la información almacenada.
+## 10. Plan de trabajo
 
-Por ejemplo, una reserva no consistirá únicamente en insertar un registro en la base de datos.
+### Entregables por etapa
 
-El backend deberá comprobar:
+| Etapa | Período | Entregable |
+|---|---|---|
+| 1 — Propuesta | hasta 30/08/2026 | Este documento: problemática, alcance, stack y repositorio declarado |
+| 2 — Diseño y módulos | 31/08 — 27/09/2026 | Modelo de base de datos, listado definitivo de módulos y estructura del repositorio |
+| 3 — Desarrollo | 28/09 — 14/11/2026 | Incrementos funcionales (auth, establecimientos, servicios/horarios, turnos, reseñas), testing y despliegue |
+| 4 — Entrega final | 14/11/2026 | Repositorio completo, aplicación desplegada, informe y video explicativo |
+| 5 — Defensa oral | Mesa de examen | Presentación y defensa ante el comité |
 
-```text
-Solicitud de reserva
-        ↓
-Usuario autenticado
-        ↓
-¿El establecimiento existe?
-        ↓
-¿Está activo?
-        ↓
-¿El servicio existe?
-        ↓
-¿El servicio está activo?
-        ↓
-¿El profesional ofrece ese servicio?
-        ↓
-¿La fecha es válida?
-        ↓
-¿Está dentro del horario de atención?
-        ↓
-¿Existe disponibilidad?
-        ↓
-¿Existe otro turno en ese horario?
-        ↓
-       NO
-        ↓
-Crear reserva
-```
+### Estimación de tiempos (etapa de desarrollo)
 
-## Principales reglas de negocio
+División orientativa en incrementos semanales: base del sistema y configuración de entornos (semanas 1-2), autenticación y roles (semana 3), establecimientos (semanas 4-5), servicios y horarios (semanas 6-7), turnos y prevención de solapamientos (semanas 8-9), reseñas (semana 10), testing/seguridad/despliegue (semanas 11-12) y, si el tiempo lo permite, funcionalidades de ampliación (semanas 13+).
 
-### Reservas
+### Riesgos iniciales y mitigaciones
 
-* Un horario no puede ser reservado por dos clientes simultáneamente.
-* Una reserva debe pertenecer a un cliente autenticado.
-* Una reserva debe estar asociada a un establecimiento.
-* Una reserva debe tener un servicio.
-* La duración del servicio debe utilizarse para determinar la ocupación del horario.
-* No se podrán realizar reservas en fechas pasadas.
-* No se podrán realizar reservas fuera del horario configurado.
-* Una reserva cancelada deberá liberar nuevamente el horario.
-* Los estados de una reserva deberán respetar las transiciones permitidas.
+| Riesgo | Mitigación |
+|---|---|
+| Subestimar la complejidad de la lógica de disponibilidad/solapamiento de turnos | Priorizar este módulo temprano en el cronograma y cubrirlo con pruebas específicas |
+| Dependencia de servicios cloud gratuitos con límites de uso | Elegir proveedores con planes free conocidos (Vercel, Render/Railway, Supabase) y monitorear límites |
+| Coordinación entre los 3 integrantes del equipo | Uso de GitHub Projects, ramas de trabajo y reuniones periódicas de seguimiento |
+| Alcance sobredimensionado para los plazos académicos | Separación explícita entre MVP y funcionalidades de ampliación (sección 6) |
 
-### Servicios
+### Criterios de éxito
 
-* Un servicio debe tener nombre.
-* Un servicio debe tener una duración válida.
-* El precio debe ser igual o mayor a cero.
-* Un servicio inactivo no podrá recibir nuevas reservas.
-* Un servicio debe pertenecer a un establecimiento.
+El MVP se considerará cumplido cuando: un profesional pueda registrar su establecimiento, servicios y horarios; un cliente pueda registrarse, buscar un establecimiento y reservar un turno sin posibilidad de solapamiento; el sistema mantenga un historial consultable de reservas; y al menos un componente esté desplegado y accesible públicamente.
 
-### Horarios
+## 11. Viabilidad del proyecto
 
-* Un establecimiento no podrá tener horarios superpuestos para un mismo período.
-* Los horarios de atención deberán ser válidos.
-* Una reserva deberá respetar los horarios configurados.
-* Un horario ocupado no deberá aparecer como disponible para nuevos clientes.
+**Viabilidad técnica:** el stack elegido (Next.js, Node/Express, PostgreSQL) es conocido por el equipo, lo que reduce el riesgo de retrasos por curva de aprendizaje. La dependencia principal es Supabase como proveedor de PostgreSQL; en caso de limitaciones, es reemplazable por otro proveedor de PostgreSQL sin cambiar el modelo de datos.
 
-### Usuarios
+**Viabilidad operativa:** el sistema está pensado para un escenario real de adopción por parte de un establecimiento chico (uno o pocos profesionales), sin requerir infraestructura propia ni conocimientos técnicos para su uso diario, lo que facilita su mantenimiento y adopción dentro del contexto académico.
 
-* El email debe ser único.
-* Un usuario solamente podrá modificar sus propios datos.
-* Las operaciones disponibles dependerán del rol.
-* Un cliente no podrá acceder a recursos administrativos de un profesional.
-* Un profesional no podrá modificar establecimientos pertenecientes a otro profesional.
+**Viabilidad temporal:** el alcance del MVP (sección 6.1) fue definido explícitamente para ser alcanzable entre el 28/09 y el 14/11/2026, dejando las funcionalidades de ampliación como objetivo secundario condicionado al avance real del desarrollo.
 
-### Reseñas
+## 12. Repositorio GitHub
 
-* Solo podrán realizar reseñas los clientes que hayan realizado un turno.
-* La reserva asociada deberá encontrarse en un estado que permita la reseña.
-* Un cliente no podrá realizar múltiples reseñas sobre la misma reserva.
-* La calificación deberá encontrarse dentro del rango establecido.
+Todo el proyecto se centraliza en un único repositorio de GitHub, que incluirá el código fuente (frontend/backend), los scripts de base de datos y la documentación e informes de cada entrega.
 
-### Chat
+Repositorio: https://github.com/Fernando-ch-am/turnos-barberias.git
 
-En caso de implementarse:
+## 13. Gestión del proyecto
 
-* Una conversación deberá estar asociada a usuarios autorizados.
-* Un usuario no podrá acceder a conversaciones ajenas.
-* Los mensajes deberán estar asociados a una conversación.
-* El sistema deberá registrar fecha y hora de cada mensaje.
+El desarrollo se organizará utilizando Git, GitHub y GitHub Projects, con ramas de trabajo, issues, pull requests y commits descriptivos, siguiendo una metodología iterativa dividida en incrementos pequeños y verificables. La revisión del tutor se utilizará como instancia de validación de alcance, arquitectura y avances.
 
----
+## 14. Estado del proyecto
 
-# 10. Requerimientos funcionales
-
-| ID    | Descripción                                                                       |
-| ----- | --------------------------------------------------------------------------------- |
-| RF-01 | El sistema deberá permitir registrar nuevos usuarios.                             |
-| RF-02 | El sistema deberá permitir iniciar y cerrar sesión.                               |
-| RF-03 | El sistema deberá permitir diferenciar usuarios según su rol.                     |
-| RF-04 | El sistema deberá permitir a un profesional registrar un establecimiento.         |
-| RF-05 | El sistema deberá permitir editar la información del establecimiento.             |
-| RF-06 | El sistema deberá permitir crear servicios asociados a un establecimiento.        |
-| RF-07 | El sistema deberá permitir modificar y desactivar servicios.                      |
-| RF-08 | El sistema deberá permitir configurar horarios de atención.                       |
-| RF-09 | El sistema deberá permitir consultar establecimientos disponibles.                |
-| RF-10 | El sistema deberá permitir consultar los servicios de un establecimiento.         |
-| RF-11 | El sistema deberá permitir consultar horarios disponibles.                        |
-| RF-12 | El sistema deberá permitir realizar reservas.                                     |
-| RF-13 | El sistema deberá impedir reservas incompatibles con la disponibilidad existente. |
-| RF-14 | El sistema deberá permitir consultar las reservas del cliente.                    |
-| RF-15 | El sistema deberá permitir a los profesionales consultar su agenda.               |
-| RF-16 | El sistema deberá permitir cancelar reservas según las reglas definidas.          |
-| RF-17 | El sistema deberá permitir modificar el estado de una reserva.                    |
-| RF-18 | El sistema deberá conservar un historial de reservas.                             |
-| RF-19 | El sistema deberá permitir a clientes habilitados realizar reseñas.               |
-| RF-20 | El sistema deberá permitir consultar las reseñas de un establecimiento.           |
-| RF-21 | El sistema deberá validar los datos ingresados tanto en frontend como backend.    |
-| RF-22 | El sistema deberá restringir el acceso a recursos según el rol del usuario.       |
-| RF-23 | El sistema deberá proporcionar una API REST para la comunicación con el frontend. |
-| RF-24 | El sistema deberá manejar errores y devolver respuestas apropiadas desde la API.  |
-
-### Requerimientos funcionales de ampliación
-
-| ID    | Descripción                                                              |
-| ----- | ------------------------------------------------------------------------ |
-| RF-25 | El sistema podrá permitir conversaciones entre clientes y profesionales. |
-| RF-26 | El sistema podrá actualizar mensajes en tiempo real.                     |
-| RF-27 | El sistema podrá enviar notificaciones relacionadas con reservas.        |
-| RF-28 | El sistema podrá permitir marcar establecimientos como favoritos.        |
-| RF-29 | El sistema podrá proporcionar estadísticas básicas a los profesionales.  |
-
----
-
-# 11. Requerimientos no funcionales
-
-| ID     | Descripción                                                                                                     |
-| ------ | --------------------------------------------------------------------------------------------------------------- |
-| RNF-01 | La aplicación deberá ser accesible desde navegadores web modernos.                                              |
-| RNF-02 | La interfaz deberá ser responsive para dispositivos móviles, tablets y escritorio.                              |
-| RNF-03 | La comunicación entre frontend y backend deberá realizarse mediante HTTPS en producción.                        |
-| RNF-04 | Las credenciales y datos sensibles deberán almacenarse utilizando mecanismos seguros.                           |
-| RNF-05 | El backend deberá validar los datos recibidos independientemente de las validaciones realizadas en el frontend. |
-| RNF-06 | La aplicación deberá controlar los permisos de acceso a los recursos.                                           |
-| RNF-07 | El sistema deberá utilizar variables de entorno para información sensible y configuración.                      |
-| RNF-08 | El código deberá mantenerse organizado y separado por responsabilidades.                                        |
-| RNF-09 | El proyecto deberá utilizar Git para el control de versiones.                                                   |
-| RNF-10 | El sistema deberá contar con documentación técnica básica para instalación y utilización.                       |
-| RNF-11 | Al menos un componente principal deberá encontrarse desplegado en un servicio online.                           |
-| RNF-12 | El sistema deberá contemplar mecanismos adecuados de manejo de errores.                                         |
-
----
-
-# 12. Reglas de negocio
-
-### RN-01 — Unicidad de usuario
-
-No podrá existir más de un usuario registrado con el mismo email.
-
-### RN-02 — Propiedad de recursos
-
-Un usuario solamente podrá modificar recursos que le pertenezcan o sobre los cuales tenga autorización.
-
-### RN-03 — Disponibilidad
-
-Un turno solamente podrá reservarse si el horario se encuentra disponible.
-
-### RN-04 — Prevención de doble reserva
-
-El sistema deberá impedir que dos reservas ocupen el mismo recurso y período de tiempo.
-
-### RN-05 — Horario de atención
-
-No podrán generarse reservas fuera de los horarios de atención configurados.
-
-### RN-06 — Fechas
-
-No se permitirán reservas correspondientes a fechas pasadas.
-
-### RN-07 — Servicio activo
-
-Un servicio desactivado no podrá utilizarse para nuevas reservas.
-
-### RN-08 — Establecimiento activo
-
-Un establecimiento desactivado no podrá recibir nuevas reservas.
-
-### RN-09 — Cancelación
-
-Una reserva solamente podrá cancelarse si se encuentra en un estado compatible con dicha operación.
-
-### RN-10 — Historial
-
-Las reservas finalizadas o canceladas deberán conservarse como historial.
-
-### RN-11 — Reseñas
-
-Un cliente solamente podrá realizar una reseña cuando cumpla las condiciones establecidas para la reserva correspondiente.
-
-### RN-12 — Seguridad
-
-Las operaciones protegidas deberán requerir autenticación y autorización.
-
----
-
-# 13. Modelo de datos inicial
-
-El modelo podrá modificarse durante la segunda entrega, luego de la revisión del tutor.
-
-## Entidades principales
-
-### User
-
-Representa a los usuarios registrados.
-
-| Campo         | Tipo      | Descripción                           |
-| ------------- | --------- | ------------------------------------- |
-| id            | UUID      | Identificador                         |
-| name          | VARCHAR   | Nombre                                |
-| email         | VARCHAR   | Email único                           |
-| password_hash | VARCHAR   | Contraseña almacenada de forma segura |
-| role          | ENUM      | CLIENT / PROFESSIONAL                 |
-| created_at    | TIMESTAMP | Fecha de creación                     |
-| updated_at    | TIMESTAMP | Última modificación                   |
-
-### Business
-
-Representa una peluquería o barbería.
-
-| Campo       | Tipo      | Descripción             |
-| ----------- | --------- | ----------------------- |
-| id          | UUID      | Identificador           |
-| owner_id    | UUID      | Profesional propietario |
-| name        | VARCHAR   | Nombre comercial        |
-| description | TEXT      | Descripción             |
-| address     | VARCHAR   | Dirección               |
-| phone       | VARCHAR   | Teléfono                |
-| active      | BOOLEAN   | Estado                  |
-| created_at  | TIMESTAMP | Fecha de creación       |
-| updated_at  | TIMESTAMP | Última modificación     |
-
-### Service
-
-Representa un servicio ofrecido por un establecimiento.
-
-| Campo            | Tipo      | Descripción         |
-| ---------------- | --------- | ------------------- |
-| id               | UUID      | Identificador       |
-| business_id      | UUID      | Establecimiento     |
-| name             | VARCHAR   | Nombre              |
-| description      | TEXT      | Descripción         |
-| duration_minutes | INTEGER   | Duración            |
-| price            | DECIMAL   | Precio              |
-| active           | BOOLEAN   | Estado              |
-| created_at       | TIMESTAMP | Fecha de creación   |
-| updated_at       | TIMESTAMP | Última modificación |
-
-### BusinessHour
-
-Representa los horarios de atención.
-
-| Campo       | Tipo    | Descripción      |
-| ----------- | ------- | ---------------- |
-| id          | UUID    | Identificador    |
-| business_id | UUID    | Establecimiento  |
-| day_of_week | INTEGER | Día de la semana |
-| open_time   | TIME    | Hora de apertura |
-| close_time  | TIME    | Hora de cierre   |
-| active      | BOOLEAN | Estado           |
-
-### Appointment
-
-Representa un turno reservado.
-
-| Campo            | Tipo      | Descripción                                 |
-| ---------------- | --------- | ------------------------------------------- |
-| id               | UUID      | Identificador                               |
-| client_id        | UUID      | Cliente                                     |
-| business_id      | UUID      | Establecimiento                             |
-| service_id       | UUID      | Servicio                                    |
-| start_at         | TIMESTAMP | Inicio del turno                            |
-| end_at           | TIMESTAMP | Fin del turno                               |
-| status           | ENUM      | PENDING / CONFIRMED / COMPLETED / CANCELLED |
-| price_at_booking | DECIMAL   | Precio registrado al reservar               |
-| created_at       | TIMESTAMP | Fecha de creación                           |
-| updated_at       | TIMESTAMP | Última modificación                         |
-
-### Review
-
-Representa una reseña realizada por un cliente.
-
-| Campo          | Tipo      | Descripción       |
-| -------------- | --------- | ----------------- |
-| id             | UUID      | Identificador     |
-| appointment_id | UUID      | Turno asociado    |
-| client_id      | UUID      | Cliente           |
-| business_id    | UUID      | Establecimiento   |
-| rating         | INTEGER   | Calificación      |
-| comment        | TEXT      | Comentario        |
-| created_at     | TIMESTAMP | Fecha de creación |
-
-### Conversation
-
-Entidad prevista para la funcionalidad de chat.
-
-| Campo           | Tipo      | Descripción       |
-| --------------- | --------- | ----------------- |
-| id              | UUID      | Identificador     |
-| client_id       | UUID      | Cliente           |
-| professional_id | UUID      | Profesional       |
-| appointment_id  | UUID      | Turno relacionado |
-| created_at      | TIMESTAMP | Fecha de creación |
-
-### Message
-
-Entidad prevista para la funcionalidad de chat.
-
-| Campo           | Tipo      | Descripción       |
-| --------------- | --------- | ----------------- |
-| id              | UUID      | Identificador     |
-| conversation_id | UUID      | Conversación      |
-| sender_id       | UUID      | Usuario que envía |
-| content         | TEXT      | Contenido         |
-| created_at      | TIMESTAMP | Fecha y hora      |
-
----
-
-# 14. Relaciones principales
-
-```text
-User
- │
- ├───────────────┐
- │               │
- │               ▼
- │            Business
- │               │
- │       ┌───────┴────────┐
- │       │                │
- │       ▼                ▼
- │    Service        BusinessHour
- │       │
- │       │
- ▼       ▼
-Appointment
- │
- ├──────────────► Review
- │
- └──────────────► Conversation
-                         │
-                         ▼
-                      Message
-```
-
-Relaciones principales:
-
-* Un **Professional** puede administrar un establecimiento.
-* Un **Business** puede tener múltiples servicios.
-* Un **Business** puede tener múltiples horarios.
-* Un **Client** puede tener múltiples reservas.
-* Un **Business** puede tener múltiples reservas.
-* Un **Service** puede estar asociado a múltiples reservas.
-* Una **Appointment** puede tener una reseña.
-* Una **Conversation** puede contener múltiples mensajes.
-
----
-
-# 15. Casos de uso principales
-
-## CU-01 — Registrar usuario
-
-**Actor:** Usuario no registrado.
-
-**Precondición:** El email no se encuentra registrado.
-
-**Flujo principal:**
-
-1. El usuario accede a la pantalla de registro.
-2. Ingresa sus datos.
-3. Selecciona el tipo de cuenta correspondiente.
-4. El sistema valida los datos.
-5. El sistema verifica que el email sea único.
-6. Se crea la cuenta.
-7. El sistema informa que el registro fue exitoso.
-
-**Flujos alternativos:**
-
-* Email existente.
-* Datos incompletos.
-* Formato de email inválido.
-* Contraseña que no cumple las condiciones establecidas.
-
----
-
-## CU-02 — Iniciar sesión
-
-**Actor:** Usuario registrado.
-
-**Flujo principal:**
-
-1. El usuario ingresa email y contraseña.
-2. El backend valida las credenciales.
-3. El sistema genera la sesión correspondiente.
-4. El usuario accede a las funcionalidades permitidas según su rol.
-
----
-
-## CU-03 — Registrar establecimiento
-
-**Actor:** Profesional.
-
-**Precondición:** El profesional está autenticado.
-
-**Flujo principal:**
-
-1. El profesional accede a la creación de establecimiento.
-2. Completa nombre, descripción, dirección y datos de contacto.
-3. El sistema valida los datos.
-4. Se crea el establecimiento.
-5. El establecimiento queda asociado al profesional.
-
----
-
-## CU-04 — Crear servicio
-
-**Actor:** Profesional.
-
-**Precondición:** Existe un establecimiento perteneciente al profesional.
-
-**Flujo principal:**
-
-1. El profesional selecciona su establecimiento.
-2. Selecciona "Nuevo servicio".
-3. Ingresa nombre, descripción, precio y duración.
-4. El sistema valida los datos.
-5. Se crea el servicio.
-
----
-
-## CU-05 — Configurar horarios
-
-**Actor:** Profesional.
-
-**Precondición:** Existe un establecimiento.
-
-**Flujo principal:**
-
-1. El profesional accede a la configuración de horarios.
-2. Selecciona un día.
-3. Define horario de apertura y cierre.
-4. El sistema valida que los horarios sean válidos.
-5. El sistema guarda la configuración.
-
----
-
-## CU-06 — Buscar establecimiento
-
-**Actor:** Cliente.
-
-**Flujo principal:**
-
-1. El cliente accede a la búsqueda.
-2. El sistema muestra establecimientos disponibles.
-3. El cliente puede consultar la información.
-4. Selecciona un establecimiento.
-5. El sistema muestra servicios y disponibilidad.
-
----
-
-## CU-07 — Reservar turno
-
-**Actor:** Cliente.
-
-**Precondición:** El cliente está autenticado.
-
-**Flujo principal:**
-
-1. El cliente selecciona un establecimiento.
-2. Selecciona un servicio.
-3. Consulta los horarios disponibles.
-4. Selecciona una fecha y horario.
-5. El frontend envía la solicitud al backend.
-6. El backend ejecuta las validaciones de negocio.
-7. Se verifica la disponibilidad.
-8. Se crea la reserva.
-9. El sistema confirma el turno.
-
-**Flujos alternativos:**
-
-* El horario dejó de estar disponible.
-* El horario está fuera de la jornada.
-* El servicio fue desactivado.
-* La fecha es inválida.
-* El usuario no está autenticado.
-
----
-
-## CU-08 — Gestionar reservas
-
-**Actor:** Profesional.
-
-**Flujo principal:**
-
-1. El profesional accede a su agenda.
-2. El sistema muestra las reservas.
-3. El profesional selecciona una reserva.
-4. Puede realizar las acciones permitidas.
-5. El sistema valida la operación.
-6. Se actualiza el estado de la reserva.
-
----
-
-## CU-09 — Cancelar reserva
-
-**Actor:** Cliente / Profesional.
-
-**Flujo principal:**
-
-1. El usuario selecciona una reserva.
-2. Solicita cancelar.
-3. El backend verifica que la cancelación esté permitida.
-4. Se actualiza el estado.
-5. El horario vuelve a estar disponible.
-
----
-
-## CU-10 — Crear reseña
-
-**Actor:** Cliente.
-
-**Precondición:** El cliente realizó un turno que cumple las condiciones necesarias.
-
-**Flujo principal:**
-
-1. El cliente accede a su historial.
-2. Selecciona un turno completado.
-3. Ingresa una puntuación y comentario.
-4. El backend valida que pueda realizar la reseña.
-5. Se registra la reseña.
-
----
-
-## CU-11 — Enviar mensaje
-
-**Actor:** Cliente / Profesional.
-
-**Precondición:** Existe una conversación autorizada.
-
-**Flujo principal:**
-
-1. El usuario accede a la conversación.
-2. Escribe un mensaje.
-3. El frontend envía el mensaje al backend.
-4. El backend valida los permisos.
-5. Se almacena el mensaje.
-6. El destinatario recibe/visualiza el nuevo mensaje.
-
-> Este caso de uso pertenece a la funcionalidad de ampliación.
-
----
-
-# 16. Estructura del repositorio
-
-Se utilizará un único repositorio de GitHub para centralizar todo el proyecto.
-
-```text
-turnos-barberias/
-│
-├── frontend/
-│   ├── src/
-│   │   ├── app/
-│   │   ├── components/
-│   │   ├── services/
-│   │   ├── hooks/
-│   │   ├── types/
-│   │   └── utils/
-│   ├── public/
-│   ├── package.json
-│   └── ...
-│
-├── backend/
-│   ├── src/
-│   │   ├── routes/
-│   │   ├── controllers/
-│   │   ├── services/
-│   │   ├── repositories/
-│   │   ├── models/
-│   │   ├── dto/
-│   │   ├── middleware/
-│   │   ├── validations/
-│   │   ├── config/
-│   │   └── utils/
-│   ├── tests/
-│   ├── package.json
-│   └── ...
-│
-├── database/
-│   ├── migrations/
-│   ├── seeds/
-│   └── README.md
-│
-├── docs/
-│   ├── architecture/
-│   ├── diagrams/
-│   ├── entregas/
-│   └── ...
-│
-├── .gitignore
-├── README.md
-└── ...
-```
-
----
-
-# 17. API Backend propuesta
-
-La API REST será organizada por recursos.
-
-Ejemplos iniciales:
-
-```text
-/api/auth
-/api/users
-/api/businesses
-/api/services
-/api/business-hours
-/api/appointments
-/api/reviews
-/api/conversations
-/api/messages
-```
-
-Ejemplos de operaciones:
-
-```text
-POST   /api/auth/register
-POST   /api/auth/login
-
-GET    /api/businesses
-POST   /api/businesses
-GET    /api/businesses/:id
-PUT    /api/businesses/:id
-
-GET    /api/businesses/:id/services
-POST   /api/businesses/:id/services
-
-GET    /api/businesses/:id/availability
-
-POST   /api/appointments
-GET    /api/appointments
-GET    /api/appointments/:id
-PATCH  /api/appointments/:id/status
-PATCH  /api/appointments/:id/cancel
-
-POST   /api/appointments/:id/review
-GET    /api/businesses/:id/reviews
-```
-
-Los endpoints definitivos se establecerán durante la etapa de arquitectura.
-
----
-
-# 18. Validaciones y seguridad
-
-El sistema contemplará validaciones en dos niveles.
-
-## Frontend
-
-Se validarán:
-
-* Campos obligatorios.
-* Formatos.
-* Valores permitidos.
-* Datos visibles para el usuario.
-
-## Backend
-
-El backend será responsable de validar nuevamente la información y ejecutar las reglas de negocio.
-
-Esto permitirá evitar que un usuario pueda saltarse las restricciones enviando solicitudes directamente a la API.
-
-Se contemplan inicialmente:
-
-* Autenticación.
-* Autorización por roles.
-* Validación de datos.
-* Manejo seguro de contraseñas.
-* Variables de entorno.
-* HTTPS en producción.
-* Protección de recursos privados.
-* Manejo centralizado de errores.
-
----
-
-# 19. Despliegue
-
-El proyecto deberá contar con componentes desplegados en servicios online.
-
-Propuesta inicial:
-
-```text
-Frontend
-Next.js
-   │
-   ▼
-Vercel
-
-Backend
-Node.js + Express
-   │
-   ▼
-Render / Railway
-
-Database
-PostgreSQL
-   │
-   ▼
-Supabase
-```
-
-El objetivo es disponer de una versión funcional accesible mediante Internet antes de la entrega final.
-
----
-
-# 20. Gestión del proyecto
-
-El desarrollo se organizará utilizando:
-
-* Git.
-* GitHub.
-* GitHub Projects.
-* Issues.
-* Pull Requests.
-* Ramas de trabajo.
-* Commits descriptivos.
-
-Se intentará mantener una metodología de trabajo iterativa, dividiendo el proyecto en funcionalidades pequeñas y entregables verificables.
-
-La revisión del tutor será utilizada como instancia de validación de alcance, arquitectura y avances.
-
----
-
-# 21. Plan de trabajo
-
-## Etapa 1 — Propuesta
-
-**Hasta el 30/08/2026**
-
-Objetivos:
-
-* Definir problemática.
-* Definir solución.
-* Definir alcance.
-* Definir tecnologías.
-* Crear repositorio.
-* Crear README inicial.
-* Presentar propuesta al tutor.
-
----
-
-## Etapa 2 — Arquitectura y módulos
-
-**31/08/2026 — 27/09/2026**
-
-Objetivos:
-
-* Diseñar modelo de datos.
-* Definir relaciones.
-* Definir módulos.
-* Diseñar arquitectura.
-* Definir endpoints principales.
-* Definir reglas de negocio.
-* Crear estructura inicial del proyecto.
-* Validar diseño con el tutor.
-* Presentar segunda entrega.
-
----
-
-## Etapa 3 — Desarrollo
-
-**28/09/2026 — 14/11/2026**
-
-El desarrollo se dividirá en incrementos.
-
-### Incremento 1 — Base del sistema
-
-* Configuración del repositorio.
-* Backend.
-* Frontend.
-* Base de datos.
-* Configuración de entornos.
-* Conexión frontend/backend.
-* Conexión backend/base de datos.
-
-### Incremento 2 — Autenticación
-
-* Registro.
-* Login.
-* Roles.
-* Protección de rutas.
-* Middleware de autenticación.
-
-### Incremento 3 — Establecimientos
-
-* CRUD de establecimientos.
-* Perfil.
-* Activación/desactivación.
-
-### Incremento 4 — Servicios y horarios
-
-* CRUD de servicios.
-* Configuración de horarios.
-* Validaciones.
-
-### Incremento 5 — Reservas
-
-* Disponibilidad.
-* Creación de turnos.
-* Cancelaciones.
-* Estados.
-* Prevención de doble reserva.
-
-### Incremento 6 — Reseñas
-
-* Registro.
-* Validación.
-* Visualización.
-
-### Incremento 7 — Calidad y producción
-
-* Testing.
-* Manejo de errores.
-* Seguridad.
-* Optimización.
-* Documentación.
-* Despliegue.
-
-### Incremento 8 — Funcionalidades de ampliación
-
-Si el MVP se encuentra estable:
-
-* Chat.
-* Notificaciones.
-* Favoritos.
-* Estadísticas.
-
----
-
-# 22. Entrega final
-
-**Fecha máxima: 14/11/2026**
-
-La entrega final contemplará:
-
-* Código fuente completo.
-* Repositorio GitHub.
-* Base de datos.
-* Scripts/migraciones.
-* Documentación.
-* Informe final.
-* Aplicación desplegada.
-* Video explicativo.
-* Evidencia del funcionamiento.
-* Preparación para defensa oral.
-
-El video explicativo será preferentemente realizado en inglés.
-
----
-
-# 23. Criterios de calidad
-
-Durante el desarrollo se buscará aplicar:
-
-* Separación de responsabilidades.
-* Código limpio.
-* Principios SOLID cuando sean aplicables.
-* Validación de entradas.
-* Manejo de errores.
-* Control de acceso.
-* Reutilización de componentes.
-* Nombres descriptivos.
-* Commits claros.
-* Documentación.
-* Pruebas de funcionalidades críticas.
-
-Se priorizará especialmente la calidad de las operaciones relacionadas con reservas, ya que constituyen una parte central de la lógica del sistema.
-
----
-
-# 24. Estado del proyecto
-
-Actualmente el proyecto se encuentra en etapa de **propuesta y planificación**.
-
-Las decisiones relacionadas con arquitectura, modelo de datos, tecnologías y alcance podrán modificarse durante las revisiones con el tutor.
-
-Este README constituye una **propuesta inicial para la primera entrega** y será actualizado progresivamente durante el desarrollo del Trabajo Final Integrador.
-
----
+Actualmente el proyecto se encuentra en etapa de propuesta y planificación (1.ª Entrega). Las decisiones de arquitectura, modelo de datos y alcance definitivo podrán ajustarse durante la 2.ª Entrega, en conjunto con el tutor.
 
 ## Licencia
 
