@@ -1,13 +1,15 @@
-package com.example.backend.DTOs;
+package com.example.backend.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data 
 @AllArgsConstructor 
-public class UsuarioDTO {
-private Long id;
+@NoArgsConstructor 
+public class UsuarioRegistroDTO {
 private String email;
 private String nombre;
+private String contraseña;
 private String rol;
 }

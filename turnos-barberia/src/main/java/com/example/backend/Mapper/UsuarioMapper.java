@@ -1,8 +1,8 @@
-package com.example.backend.Mapper;
+package com.example.backend.mapper;
 
-import com.example.backend.DTOs.UsuarioDTO;
-import com.example.backend.DTOs.UsuarioRegistroDTO;
-import com.example.backend.Entitys.Usuario;
+import com.example.backend.dto.UsuarioDTO;
+import com.example.backend.dto.UsuarioRegistroDTO;
+import com.example.backend.entity.Usuario;
 
 public class UsuarioMapper{
 
