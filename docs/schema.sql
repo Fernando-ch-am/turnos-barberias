@@ -1,147 +1,135 @@
--- Script corregido — Turnos Barberías
--- Correcciones aplicadas:
---   1. reseña.turno_id en vez de peluqueria_id (con su FK)
---   2. Nombres de CONSTRAINT únicos en todo el schema (evita error de ejecución)
---   3. servicio.peluqueria_id como INT + FK agregada
---   4. turno.estado (VARCHAR) en vez de disponible (TINYINT) — ver nota abajo
---   5. servicio.duracion como INT en vez de DOUBLE
-
-SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
-SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
-SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
-
+-- Script migrado a PostgreSQL — Turnos Barberías
+-- Cambios respecto a la versión MySQL:
+--   - Sin SET @OLD_... (son variables de sesión propias de MySQL)
+--   - Sin CREATE SCHEMA / USE (se usa el schema "public" por defecto de Postgres/Supabase)
+--   - AUTO_INCREMENT -> GENERATED ALWAYS AS IDENTITY
+--   - Sin backticks alrededor de nombres (no hacen falta en Postgres)
+--   - TINYINT -> BOOLEAN (campo "activo")
+--   - Sin ENGINE = InnoDB (no existe en Postgres)
+--   - Los INDEX inline de MySQL pasan a CREATE INDEX separados al final
+ 
 -- -----------------------------------------------------
--- Schema mydb
+-- Table usuario
 -- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `mydb` DEFAULT CHARACTER SET utf8 ;
-USE `mydb` ;
-
+CREATE TABLE IF NOT EXISTS usuario (
+  id INT GENERATED ALWAYS AS IDENTITY,
+  email VARCHAR(45) NOT NULL,
+  nombre VARCHAR(45) NOT NULL,
+  contraseña VARCHAR(255) NOT NULL,
+  rol VARCHAR(45) NOT NULL,
+  PRIMARY KEY (id),
+  UNIQUE (email)
+);
+ 
 -- -----------------------------------------------------
--- Table `mydb`.`usuario`
+-- Table peluqueria
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`usuario` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `email` VARCHAR(45) NOT NULL,
-  `nombre` VARCHAR(45) NOT NULL,
-  `contraseña` VARCHAR(45) NOT NULL,
-  `rol` VARCHAR(45) NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE INDEX `email_UNIQUE` (`email` ASC) VISIBLE)
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `mydb`.`peluqueria`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`peluqueria` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `nombre_p` VARCHAR(45) NOT NULL,
-  `descripcion` VARCHAR(45) NOT NULL,
-  `telefono` VARCHAR(45) NOT NULL,
-  `direccion` VARCHAR(45) NOT NULL,
-  `usuario_id` INT NULL,
-  PRIMARY KEY (`id`),
-  INDEX `fk_peluqueria_usuario_idx` (`usuario_id` ASC) VISIBLE,
-  CONSTRAINT `fk_peluqueria_usuario`
-    FOREIGN KEY (`usuario_id`)
-    REFERENCES `mydb`.`usuario` (`id`)
+CREATE TABLE IF NOT EXISTS peluqueria (
+  id INT GENERATED ALWAYS AS IDENTITY,
+  nombre_p VARCHAR(45) NOT NULL,
+  descripcion VARCHAR(45) NOT NULL,
+  telefono VARCHAR(45) NOT NULL,
+  direccion VARCHAR(45) NOT NULL,
+  usuario_id INT,
+  PRIMARY KEY (id),
+  CONSTRAINT fk_peluqueria_usuario
+    FOREIGN KEY (usuario_id)
+    REFERENCES usuario (id)
     ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
-
-
+    ON UPDATE NO ACTION
+);
+ 
+CREATE INDEX IF NOT EXISTS fk_peluqueria_usuario_idx ON peluqueria (usuario_id);
+ 
 -- -----------------------------------------------------
--- Table `mydb`.`servicio`
+-- Table servicio
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`servicio` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `nombre` VARCHAR(45) NULL,
-  `descripcion` VARCHAR(45) NULL,
-  `precio` DOUBLE NULL,
-  `duracion` INT NULL,
-  `activo` TINYINT NULL,
-  `peluqueria_id` INT NULL,
-  PRIMARY KEY (`id`),
-  INDEX `fk_servicio_peluqueria_idx` (`peluqueria_id` ASC) VISIBLE,
-  CONSTRAINT `fk_servicio_peluqueria`
-    FOREIGN KEY (`peluqueria_id`)
-    REFERENCES `mydb`.`peluqueria` (`id`)
+CREATE TABLE IF NOT EXISTS servicio (
+  id INT GENERATED ALWAYS AS IDENTITY,
+  nombre VARCHAR(45),
+  descripcion VARCHAR(45),
+  precio DOUBLE PRECISION,
+  duracion INT,
+  activo BOOLEAN,
+  peluqueria_id INT,
+  PRIMARY KEY (id),
+  CONSTRAINT fk_servicio_peluqueria
+    FOREIGN KEY (peluqueria_id)
+    REFERENCES peluqueria (id)
     ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
-
-
+    ON UPDATE NO ACTION
+);
+ 
+CREATE INDEX IF NOT EXISTS fk_servicio_peluqueria_idx ON servicio (peluqueria_id);
+ 
 -- -----------------------------------------------------
--- Table `mydb`.`horario`
+-- Table horario
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`horario` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `peluqueria_id` INT NULL,
-  `dia` INT NULL,
-  `horario_inicio` TIME NULL,
-  `horario_fin` TIME NULL,
-  PRIMARY KEY (`id`),
-  INDEX `fk_horario_peluqueria_idx` (`peluqueria_id` ASC) VISIBLE,
-  CONSTRAINT `fk_horario_peluqueria`
-    FOREIGN KEY (`peluqueria_id`)
-    REFERENCES `mydb`.`peluqueria` (`id`)
+CREATE TABLE IF NOT EXISTS horario (
+  id INT GENERATED ALWAYS AS IDENTITY,
+  peluqueria_id INT,
+  dia INT,
+  horario_inicio TIME,
+  horario_fin TIME,
+  PRIMARY KEY (id),
+  CONSTRAINT fk_horario_peluqueria
+    FOREIGN KEY (peluqueria_id)
+    REFERENCES peluqueria (id)
     ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
-
-
+    ON UPDATE NO ACTION
+);
+ 
+CREATE INDEX IF NOT EXISTS fk_horario_peluqueria_idx ON horario (peluqueria_id);
+ 
 -- -----------------------------------------------------
--- Table `mydb`.`turno`
+-- Table turno
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`turno` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `fecha` DATE NULL,
-  `horario_inicio` TIME NULL,
-  `horario_fin` TIME NULL,
-  `estado` VARCHAR(45) NULL,
-  `usuario_id` INT NULL,
-  `peluqueria_id` INT NULL,
-  `servicio_id` INT NULL,
-  PRIMARY KEY (`id`),
-  INDEX `fk_turno_servicio_idx` (`servicio_id` ASC) VISIBLE,
-  INDEX `fk_turno_usuario_idx` (`usuario_id` ASC) VISIBLE,
-  INDEX `fk_turno_peluqueria_idx` (`peluqueria_id` ASC) VISIBLE,
-  CONSTRAINT `fk_turno_servicio`
-    FOREIGN KEY (`servicio_id`)
-    REFERENCES `mydb`.`servicio` (`id`)
+CREATE TABLE IF NOT EXISTS turno (
+  id INT GENERATED ALWAYS AS IDENTITY,
+  fecha DATE,
+  horario_inicio TIME,
+  horario_fin TIME,
+  estado VARCHAR(45),
+  usuario_id INT,
+  peluqueria_id INT,
+  servicio_id INT,
+  PRIMARY KEY (id),
+  CONSTRAINT fk_turno_servicio
+    FOREIGN KEY (servicio_id)
+    REFERENCES servicio (id)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `fk_turno_usuario`
-    FOREIGN KEY (`usuario_id`)
-    REFERENCES `mydb`.`usuario` (`id`)
+  CONSTRAINT fk_turno_usuario
+    FOREIGN KEY (usuario_id)
+    REFERENCES usuario (id)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `fk_turno_peluqueria`
-    FOREIGN KEY (`peluqueria_id`)
-    REFERENCES `mydb`.`peluqueria` (`id`)
+  CONSTRAINT fk_turno_peluqueria
+    FOREIGN KEY (peluqueria_id)
+    REFERENCES peluqueria (id)
     ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
-
-
+    ON UPDATE NO ACTION
+);
+ 
+CREATE INDEX IF NOT EXISTS fk_turno_servicio_idx ON turno (servicio_id);
+CREATE INDEX IF NOT EXISTS fk_turno_usuario_idx ON turno (usuario_id);
+CREATE INDEX IF NOT EXISTS fk_turno_peluqueria_idx ON turno (peluqueria_id);
+ 
 -- -----------------------------------------------------
--- Table `mydb`.`reseña`
+-- Table reseña
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`reseña` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `turno_id` INT NULL,
-  `calificacion` INT NULL,
-  `comentario` VARCHAR(45) NULL,
-  PRIMARY KEY (`id`),
-  INDEX `fk_resena_turno_idx` (`turno_id` ASC) VISIBLE,
-  CONSTRAINT `fk_resena_turno`
-    FOREIGN KEY (`turno_id`)
-    REFERENCES `mydb`.`turno` (`id`)
+CREATE TABLE IF NOT EXISTS reseña (
+  id INT GENERATED ALWAYS AS IDENTITY,
+  turno_id INT,
+  calificacion INT,
+  comentario VARCHAR(45),
+  PRIMARY KEY (id),
+  CONSTRAINT fk_resena_turno
+    FOREIGN KEY (turno_id)
+    REFERENCES turno (id)
     ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
-
-
-SET SQL_MODE=@OLD_SQL_MODE;
-SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
-SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+    ON UPDATE NO ACTION
+);
+ 
+CREATE INDEX IF NOT EXISTS fk_resena_turno_idx ON reseña (turno_id);
+ 

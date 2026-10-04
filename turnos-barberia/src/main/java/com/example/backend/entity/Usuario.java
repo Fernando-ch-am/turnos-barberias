@@ -27,8 +27,8 @@ private String email;
 @Column(name = "nombre", nullable=false, length=50)
 private String nombre;
 
-@Column(name = "contraseña", nullable=false, length=255)
-private String contraseña;
+@Column(name = "contrasena", nullable=false, length=255)
+private String contrasena;
 
 @Column(name = "rol", nullable=false)
 private String rol;

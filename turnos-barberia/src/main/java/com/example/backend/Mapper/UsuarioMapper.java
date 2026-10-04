@@ -15,7 +15,7 @@ public static Usuario toEntity(UsuarioRegistroDTO r){
     Usuario u = new Usuario();
     u.setEmail(r.getEmail());
     u.setNombre(r.getNombre());
-    u.setContraseña(r.getContraseña());
+    u.setContrasena(r.getContrasena());
     u.setRol(r.getRol());
     return u;
 }
