@@ -1,0 +1,49 @@
+/* Tokens de color aproximados a partir del diseño (mockups). Ajustar cuando haya guía de estilo definitiva. */
+:root {
+  --color-bg: #f6f4ff;
+  --color-surface: #ffffff;
+  --color-muted: #eeebf8;
+  --color-text: #000000;
+  --color-text-soft: #5b5868;
+  --color-primary: #000000;
+  --color-primary-text: #ffffff;
+  --color-accent: #9a3b0c;
+  --color-accent-soft: #ffe0d1;
+  --color-success: #17a673;
+  --color-danger: #b3261e;
+  --radius: 12px;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  line-height: 1.5;
+}
+
+.home {
+  max-width: 40rem;
+  margin: 0 auto;
+  padding: 3rem 1.25rem;
+}
+
+.home h1 {
+  margin: 0 0 0.5rem;
+}
+
+.home p {
+  margin: 0;
+  color: var(--color-text-soft);
+}

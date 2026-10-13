@@ -261,6 +261,36 @@ Todo el proyecto se centraliza en un único repositorio de GitHub, que incluirá
 
 Repositorio: https://github.com/Fernando-ch-am/turnos-barberias.git
 
+### Estructura del repositorio y puesta en marcha
+
+```
+turnos-barberias/
+├── backend/      # API REST: Node.js + Express + TypeScript
+├── frontend/     # Aplicación web: Next.js + TypeScript
+└── docs/         # Diagrama ER, schema.sql, listado de módulos y mockups (docs/diseno)
+```
+
+**Requisitos:** Node.js 20 o superior (ver `.nvmrc`) y una base PostgreSQL (Supabase).
+
+1. **Base de datos:** ejecutar `docs/schema.sql` en el SQL Editor de Supabase.
+2. **Backend:**
+   ```bash
+   cd backend
+   cp .env.example .env     # completar DATABASE_URL y JWT_SECRET
+   npm install
+   npm run dev              # http://localhost:4000/api/health
+   ```
+   `GET /api/health/db` verifica la conexión con la base.
+3. **Frontend:**
+   ```bash
+   cd frontend
+   cp .env.example .env.local
+   npm install
+   npm run dev              # http://localhost:3000
+   ```
+
+Los archivos `.env` no se commitean: solo se versionan los `.env.example`. La organización interna de cada capa está documentada en `backend/src/modules/README.md` y `frontend/src/features/README.md`.
+
 ## 13. Gestión del proyecto
 
 El desarrollo se organizará utilizando Git, GitHub y GitHub Projects, con ramas de trabajo, issues, pull requests y commits descriptivos, siguiendo una metodología iterativa dividida en incrementos pequeños y verificables. La revisión del tutor se utilizará como instancia de validación de alcance, arquitectura y avances.

@@ -20,17 +20,23 @@ Listado de módulos a desarrollar en el repositorio, mapeados 1 a 1 con las enti
 ## Estructura de carpetas (backend)
 
 ```
-backend/
-├── auth/
-│   ├── routes/
-│   ├── controller/
-│   ├── service/
-│   ├── repository/
-│   └── dto/
-├── usuarios/
-├── establecimientos/
-├── servicios/
-├── horarios/
-├── turnos/
-└── resenas/
+backend/src/
+├── config/          # env.ts (variables validadas) y db.ts (pool de PostgreSQL)
+├── routes/          # index.ts: monta los routers de cada módulo bajo /api
+├── shared/          # AppError, errorHandler, validate (compartido por todos los módulos)
+└── modules/
+    ├── auth/
+    │   ├── routes/
+    │   ├── controller/
+    │   ├── service/
+    │   ├── repository/
+    │   └── dto/
+    ├── usuarios/
+    ├── establecimientos/
+    ├── servicios/
+    ├── horarios/
+    ├── turnos/
+    └── resenas/
 ```
+
+Cada módulo repite las mismas cinco carpetas. Las convenciones de cada capa están en `backend/src/modules/README.md`.
