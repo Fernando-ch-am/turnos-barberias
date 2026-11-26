@@ -1,17 +1,34 @@
-/* Tokens de color aproximados a partir del diseño (mockups). Ajustar cuando haya guía de estilo definitiva. */
+/* Tokens del sistema de diseño "Warm Obsidian Atelier" (ver ESTILOS Y HTML/DESIGN.md). */
 :root {
-  --color-bg: #f6f4ff;
+  --color-bg: #fafafa;
   --color-surface: #ffffff;
-  --color-muted: #eeebf8;
-  --color-text: #000000;
-  --color-text-soft: #5b5868;
-  --color-primary: #000000;
+  --color-muted: #f4f4f5;
+  --color-text: #121316;
+  --color-text-body: #27272a;
+  --color-text-soft: #71717a;
+  --color-border: #e5e7eb;
+  --color-border-strong: #d4d4d8;
+
+  --color-primary: #121316;
   --color-primary-text: #ffffff;
-  --color-accent: #9a3b0c;
-  --color-accent-soft: #ffe0d1;
-  --color-success: #17a673;
-  --color-danger: #b3261e;
-  --radius: 12px;
+  --color-accent: #b45309;
+  --color-accent-bright: #d97706;
+  --color-accent-soft: #fef3c7;
+
+  --color-success: #059669;
+  --color-success-bg: #ecfdf5;
+  --color-success-border: #a7f3d0;
+  --color-warning: #d97706;
+  --color-warning-bg: #fffbeb;
+  --color-warning-border: #fde68a;
+  --color-danger: #dc2626;
+  --color-danger-bg: #fef2f2;
+  --color-danger-border: #fecaca;
+
+  --radius-sm: 0.5rem;
+  --radius: 0.75rem;
+  --radius-lg: 1rem;
+  --radius-full: 9999px;
 }
 
 *,
@@ -28,22 +45,432 @@ body {
 
 body {
   background: var(--color-bg);
+  color: var(--color-text-body);
+  font-family: 'Plus Jakarta Sans', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  font-size: 14px;
+  line-height: 1.45;
+}
+
+h1,
+h2,
+h3 {
   color: var(--color-text);
-  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
-  line-height: 1.5;
-}
-
-.home {
-  max-width: 40rem;
-  margin: 0 auto;
-  padding: 3rem 1.25rem;
-}
-
-.home h1 {
-  margin: 0 0 0.5rem;
-}
-
-.home p {
+  letter-spacing: -0.02em;
   margin: 0;
+}
+
+a {
+  color: inherit;
+}
+
+/* ---------- Estructura ---------- */
+.contenedor {
+  max-width: 44rem;
+  margin: 0 auto;
+  padding: 1.5rem 1rem 4rem;
+}
+
+.cabecera {
+  background: var(--color-surface);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.cabecera__interior {
+  max-width: 44rem;
+  margin: 0 auto;
+  padding: 0.75rem 1rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.cabecera__marca {
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: var(--color-text);
+  text-decoration: none;
+  letter-spacing: -0.02em;
+  margin-right: auto;
+}
+
+.cabecera__nav {
+  display: flex;
+  gap: 0.25rem;
+  flex-wrap: wrap;
+}
+
+.cabecera__nav a {
+  text-decoration: none;
+  padding: 0.35rem 0.75rem;
+  border-radius: var(--radius-full);
   color: var(--color-text-soft);
+  font-weight: 500;
+}
+
+.cabecera__nav a:hover {
+  background: var(--color-muted);
+  color: var(--color-text);
+}
+
+.cabecera__usuario {
+  color: var(--color-text-soft);
+  font-size: 12px;
+}
+
+.titulo-pagina {
+  font-size: 26px;
+  line-height: 34px;
+  font-weight: 700;
+  margin-bottom: 0.25rem;
+}
+
+.subtitulo-pagina {
+  color: var(--color-text-soft);
+  margin: 0 0 1.5rem;
+}
+
+/* ---------- Tarjetas ---------- */
+.tarjeta {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: 1rem;
+  margin-bottom: 0.75rem;
+}
+
+.tarjeta__fila {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 0.75rem;
+}
+
+.tarjeta__titulo {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.tarjeta__meta {
+  color: var(--color-text-soft);
+  font-size: 13px;
+  margin-top: 0.15rem;
+}
+
+.tarjeta__acciones {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-top: 0.85rem;
+}
+
+.precio {
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+/* ---------- Botones ---------- */
+.boton {
+  font: inherit;
+  font-weight: 600;
+  border: 1px solid var(--color-primary);
+  background: var(--color-primary);
+  color: var(--color-primary-text);
+  padding: 0.6rem 1.1rem;
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.boton:hover:not(:disabled) {
+  opacity: 0.88;
+}
+
+.boton:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.boton--secundario {
+  background: var(--color-surface);
+  color: var(--color-text);
+  border-color: var(--color-border-strong);
+}
+
+.boton--peligro {
+  background: var(--color-surface);
+  color: var(--color-danger);
+  border-color: var(--color-danger-border);
+}
+
+.boton--chico {
+  padding: 0.35rem 0.8rem;
+  font-size: 13px;
+}
+
+.boton--ancho {
+  width: 100%;
+  padding: 0.85rem;
+}
+
+/* ---------- Formularios ---------- */
+.campo {
+  display: block;
+  margin-bottom: 1rem;
+}
+
+.campo__label {
+  display: block;
+  font-weight: 600;
+  color: var(--color-text);
+  margin-bottom: 0.35rem;
+}
+
+.campo__input {
+  font: inherit;
+  width: 100%;
+  padding: 0.65rem 0.8rem;
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius);
+  background: var(--color-surface);
+  color: var(--color-text);
+}
+
+.campo__input:focus {
+  outline: 2px solid var(--color-accent-bright);
+  outline-offset: 1px;
+}
+
+.campo__ayuda {
+  color: var(--color-text-soft);
+  font-size: 12px;
+  margin-top: 0.25rem;
+  text-align: right;
+}
+
+/* ---------- Estados / avisos ---------- */
+.aviso {
+  padding: 0.75rem 1rem;
+  border-radius: var(--radius);
+  margin-bottom: 1rem;
+  border: 1px solid;
+}
+
+.aviso--error {
+  background: var(--color-danger-bg);
+  border-color: var(--color-danger-border);
+  color: var(--color-danger);
+}
+
+.aviso--ok {
+  background: var(--color-success-bg);
+  border-color: var(--color-success-border);
+  color: var(--color-success);
+}
+
+.aviso--info {
+  background: var(--color-muted);
+  border-color: var(--color-border);
+  color: var(--color-text-soft);
+}
+
+.vacio {
+  text-align: center;
+  color: var(--color-text-soft);
+  padding: 2.5rem 1rem;
+  border: 1px dashed var(--color-border-strong);
+  border-radius: var(--radius-lg);
+}
+
+/* ---------- Badge de estado del turno ---------- */
+.estado {
+  display: inline-block;
+  padding: 0.15rem 0.65rem;
+  border-radius: var(--radius-full);
+  font-size: 12px;
+  font-weight: 600;
+  border: 1px solid;
+  white-space: nowrap;
+}
+
+.estado--pendiente {
+  color: var(--color-warning);
+  background: var(--color-warning-bg);
+  border-color: var(--color-warning-border);
+}
+
+.estado--confirmado,
+.estado--completado {
+  color: var(--color-success);
+  background: var(--color-success-bg);
+  border-color: var(--color-success-border);
+}
+
+.estado--cancelado {
+  color: var(--color-danger);
+  background: var(--color-danger-bg);
+  border-color: var(--color-danger-border);
+}
+
+/* ---------- Pestañas ---------- */
+.pestanas {
+  display: flex;
+  gap: 0.25rem;
+  background: var(--color-muted);
+  padding: 0.25rem;
+  border-radius: var(--radius-full);
+  margin-bottom: 1rem;
+  width: fit-content;
+}
+
+.pestana {
+  font: inherit;
+  font-weight: 600;
+  border: 0;
+  background: transparent;
+  color: var(--color-text-soft);
+  padding: 0.4rem 1rem;
+  border-radius: var(--radius-full);
+  cursor: pointer;
+}
+
+.pestana--activa {
+  background: var(--color-surface);
+  color: var(--color-text);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
+}
+
+/* ---------- Selector de día y horarios ---------- */
+.dias {
+  display: flex;
+  gap: 0.5rem;
+  overflow-x: auto;
+  padding-bottom: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.dia {
+  font: inherit;
+  flex: 0 0 auto;
+  min-width: 4rem;
+  padding: 0.5rem 0.25rem;
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  border-radius: var(--radius);
+  cursor: pointer;
+  text-align: center;
+  color: var(--color-text-body);
+}
+
+.dia__semana {
+  display: block;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--color-text-soft);
+}
+
+.dia__numero {
+  display: block;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+.dia--activo {
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+}
+
+.dia--activo .dia__semana,
+.dia--activo .dia__numero {
+  color: var(--color-primary-text);
+}
+
+.slots {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(5.2rem, 1fr));
+  gap: 0.5rem;
+  margin-bottom: 1.25rem;
+}
+
+.slot {
+  font: inherit;
+  font-weight: 600;
+  padding: 0.55rem 0;
+  border: 1px solid var(--color-border-strong);
+  background: var(--color-surface);
+  border-radius: var(--radius);
+  cursor: pointer;
+  color: var(--color-text);
+}
+
+.slot:hover {
+  border-color: var(--color-accent-bright);
+}
+
+.slot--activo {
+  background: var(--color-accent-soft);
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+}
+
+.resumen {
+  background: var(--color-muted);
+  border-radius: var(--radius);
+  padding: 0.85rem 1rem;
+  margin-bottom: 1rem;
+}
+
+.resumen p {
+  margin: 0.15rem 0;
+}
+
+/* ---------- Estrellas ---------- */
+.estrellas {
+  display: inline-flex;
+  gap: 0.1rem;
+  color: var(--color-accent-bright);
+  letter-spacing: 0.05em;
+}
+
+.estrellas--grande {
+  font-size: 2rem;
+  gap: 0.25rem;
+}
+
+.estrella-boton {
+  font: inherit;
+  font-size: 2.25rem;
+  line-height: 1;
+  background: none;
+  border: 0;
+  padding: 0 0.1rem;
+  cursor: pointer;
+  color: var(--color-border-strong);
+}
+
+.estrella-boton--llena {
+  color: var(--color-accent-bright);
+}
+
+.promedio {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.promedio__numero {
+  font-size: 40px;
+  line-height: 48px;
+  font-weight: 700;
+  color: var(--color-text);
+  letter-spacing: -0.03em;
+}
+
+/* Si la pantalla no pasa ningún botón, no se muestra el contenedor vacío. */
+.tarjeta__acciones:empty {
+  display: none;
 }

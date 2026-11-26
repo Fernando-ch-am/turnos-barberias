@@ -1,5 +1,7 @@
 import { Router } from 'express';
 import { pool } from '../config/db';
+import { resenasRouter } from '../modules/resenas/routes/resenas.routes';
+import { turnosRouter } from '../modules/turnos/routes/turnos.routes';
 
 export const apiRouter = Router();
 
@@ -16,3 +18,5 @@ apiRouter.get('/health/db', async (_req, res) => {
 // Cada módulo monta su router acá. Ejemplo:
 //   import { serviciosRouter } from '../modules/servicios/routes/servicios.routes';
 //   apiRouter.use('/servicios', serviciosRouter);
+apiRouter.use('/turnos', turnosRouter);
+apiRouter.use('/resenas', resenasRouter);
